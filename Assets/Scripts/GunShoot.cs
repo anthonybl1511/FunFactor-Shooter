@@ -24,6 +24,7 @@ public class GunShoot : MonoBehaviour
     float valueToLerp;
 
     float particlesCount;
+    private bool canShoot = true;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class GunShoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && !Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && !Input.GetKeyUp(KeyCode.Mouse0) && canShoot)
         {
             if(shakeAmount < 0.02f)
             {
@@ -84,12 +85,14 @@ public class GunShoot : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot)
         {
+            canShoot = false;
             particles.emission.SetBurst(0, new ParticleSystem.Burst(0.0f, particlesCount));
             particles.Play();
 
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.GetComponent<CreatePickleTree>().setTreeSizeMultiplier((fovAmount/20)+1);
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
 
             bulletSpeed = 0;
@@ -103,6 +106,8 @@ public class GunShoot : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
             gameObject.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
             gameObject.transform.GetChild(2).gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.6f, 0.6f, 0.6f);
+
+            Invoke("CanShootAgain", 1);
         }
 
         if (timeElapsed < lerpDuration && returnToFOV)
@@ -118,5 +123,10 @@ public class GunShoot : MonoBehaviour
                 valueToLerp = 60;
             }
         }
+    }
+
+    private void CanShootAgain()
+    {
+        canShoot = true;
     }
 }

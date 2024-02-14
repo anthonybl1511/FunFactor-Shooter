@@ -149,9 +149,10 @@ GameObject:
   - component: {fileID: 3274114086055356413}
   - component: {fileID: 2434784868973220625}
   - component: {fileID: 451254094702145432}
+  - component: {fileID: 2398089103268068284}
   m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
+  m_Name: Pickle
+  m_TagString: Smashable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +168,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.458096, y: 1.44, z: 6.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227044753417214736}
   m_Father: {fileID: 0}
@@ -272,6 +273,19 @@ CapsuleCollider:
   m_Height: 1.3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: -0.12}
+--- !u!114 &2398089103268068284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635376732849744561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f36ad3216975f84aafdf717d2ca5253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treePrefab: {fileID: 5239531742651627163, guid: 13ad1d078e5e82e418050c3a35916509, type: 3}
 --- !u!1001 &336672098639543547
 PrefabInstance:
   m_ObjectHideFlags: 0
