@@ -1,5 +1,8 @@
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreeIncomScore : MonoBehaviour
 {
@@ -8,6 +11,8 @@ public class TreeIncomScore : MonoBehaviour
     private float scoreMultiplier;
     private int score;
     private Animator animator;
+    private float timerValue;
+    private float t = 0.0f;
 
     private void Start()
     {
@@ -21,6 +26,16 @@ public class TreeIncomScore : MonoBehaviour
         {
             canAddScore = false;
             Invoke("addScore", 1);
+        }
+
+        timerValue = Mathf.Lerp(0, 1, t);
+        transform.GetChild(4).transform.GetChild(0).gameObject.GetComponent<Slider>().value = timerValue;
+        transform.GetChild(4).transform.LookAt(Camera.main.transform);
+        t += Time.deltaTime;
+
+        if (t > 1.0f)
+        {
+            t = 0.0f;
         }
     }
     private void addScore()
