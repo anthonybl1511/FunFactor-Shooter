@@ -26,6 +26,8 @@ public class GunShoot : MonoBehaviour
     float particlesCount;
     private bool canShoot = true;
 
+    [SerializeField] private AudioSource holdSound;
+
     private void Start()
     {
         initialPosition = transform.localPosition;
@@ -37,6 +39,12 @@ public class GunShoot : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
+        {
+            holdSound.pitch = (Random.Range(0.95f, 1.05f));
+            holdSound.Play();
+        }
+
         if (Input.GetKey(KeyCode.Mouse0) && !Input.GetKeyUp(KeyCode.Mouse0) && canShoot)
         {
             if(shakeAmount < 0.02f)
@@ -87,6 +95,8 @@ public class GunShoot : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot)
         {
+            holdSound.Stop();
+
             canShoot = false;
             particles.emission.SetBurst(0, new ParticleSystem.Burst(0.0f, particlesCount));
             particles.Play();

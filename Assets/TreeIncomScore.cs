@@ -13,6 +13,7 @@ public class TreeIncomScore : MonoBehaviour
     private Animator animator;
     private float timerValue;
     private float t = 0.0f;
+    [SerializeField] private AudioSource incomSound;
 
     private void Start()
     {
@@ -40,6 +41,9 @@ public class TreeIncomScore : MonoBehaviour
     }
     private void addScore()
     {
+        incomSound.pitch = (Random.Range(0.9f, 1.1f));
+        incomSound.Play();
+
         score = (int) Mathf.Pow(100, 0.65f * scoreMultiplier);
 
         animator.SetTrigger("Squish");
